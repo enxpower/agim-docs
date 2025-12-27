@@ -3,76 +3,607 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>AGI&M ASSETS INC. | Downloads</title>
-  <meta name="description" content="AGI&M ASSETS INC. public downloads" />
-  <link rel="icon" href="./favicon.ico" />
-  <link rel="stylesheet" href="./styles.css" />
+  <title>AGI&M ASSETS INC. — Official Documents & Resources</title>
+  <meta name="description" content="AGI&M ASSETS INC. — Official public documents and resources." />
+  <meta name="robots" content="index,follow" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --surface:#ffffff;
+      --muted:#f4f6f8;
+      --border:#e6e8ec;
+      --text:#0b1220;
+      --sub:#516075;
+      --link:#0b5fff;
+      --chip:#eef3ff;
+      --shadow: 0 10px 30px rgba(11,18,32,.06);
+      --radius:16px;
+      --radius2:12px;
+      --max:1120px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background:var(--bg);
+      color:var(--text);
+    }
+
+    a{color:var(--link); text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:28px 20px 22px;
+    }
+
+    /* Header */
+    header{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:18px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:260px;
+    }
+
+    .logo{
+      width:40px;height:40px;border-radius:10px;
+      background: linear-gradient(135deg, #1b6cff, #00c2ff);
+      box-shadow: 0 8px 20px rgba(11,95,255,.18);
+      display:grid;place-items:center;
+      color:#fff;
+      font-weight:800;
+      letter-spacing:.5px;
+      user-select:none;
+    }
+
+    .brand h1{
+      margin:0;
+      font-size:16px;
+      letter-spacing:.8px;
+      text-transform:uppercase;
+      line-height:1.2;
+    }
+    .brand p{
+      margin:3px 0 0;
+      font-size:12px;
+      color:var(--sub);
+    }
+
+    .search{
+      width: min(520px, 100%);
+      display:flex;
+      justify-content:flex-end;
+    }
+
+    .search input{
+      width:100%;
+      padding:12px 14px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background:var(--surface);
+      outline:none;
+      box-shadow: 0 1px 0 rgba(11,18,32,.02);
+      font-size:14px;
+    }
+    .search input:focus{
+      border-color: rgba(11,95,255,.45);
+      box-shadow: 0 0 0 4px rgba(11,95,255,.10);
+    }
+
+    /* Status bar */
+    .status{
+      background:var(--muted);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:12px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin:14px 0 18px;
+    }
+    .status .left{
+      display:flex; align-items:center; gap:10px;
+      color:var(--sub);
+      font-size:13px;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:50%;
+      background:#b8c2d3;
+    }
+    .dot.ok{ background:#1bb55c;}
+    .dot.err{ background:#e23d3d;}
+    .status .right{
+      color:var(--sub);
+      font-size:12px;
+    }
+
+    /* Sections */
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:16px;
+      align-items:start;
+    }
+    @media (max-width: 920px){
+      .grid{ grid-template-columns: 1fr; }
+      header{ flex-direction:column; align-items:stretch;}
+      .search{ justify-content:flex-start; }
+    }
+
+    .section{
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .section-head{
+      padding:14px 16px;
+      background: linear-gradient(180deg, #ffffff, #fbfcfe);
+      border-bottom:1px solid var(--border);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .section-title{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .pill{
+      font-size:12px;
+      color:#24406f;
+      background:var(--chip);
+      border:1px solid rgba(11,95,255,.14);
+      padding:4px 10px;
+      border-radius:999px;
+      font-weight:600;
+    }
+    .section-head h2{
+      margin:0;
+      font-size:14px;
+      letter-spacing:.2px;
+    }
+    .section-body{
+      padding:10px;
+    }
+
+    /* File cards */
+    .file{
+      border:1px solid var(--border);
+      border-radius:var(--radius2);
+      padding:12px 12px;
+      background:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin:10px 0;
+    }
+    .file-left{
+      min-width:0;
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+    }
+    .icon{
+      width:34px;height:34px;border-radius:10px;
+      background:var(--muted);
+      border:1px solid var(--border);
+      display:grid;place-items:center;
+      flex:0 0 auto;
+      color:#263a57;
+    }
+    .file-name{
+      font-size:13px;
+      font-weight:650;
+      line-height:1.25;
+      margin:0 0 4px;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      display:-webkit-box;
+      -webkit-line-clamp:2;
+      -webkit-box-orient:vertical;
+    }
+    .file-meta{
+      font-size:12px;
+      color:var(--sub);
+      margin:0;
+    }
+
+    .file-actions{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex:0 0 auto;
+    }
+    .btn{
+      border:1px solid var(--border);
+      background:#fff;
+      padding:8px 10px;
+      border-radius:10px;
+      font-size:12px;
+      font-weight:650;
+      color:#20324d;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      user-select:none;
+    }
+    .btn:hover{
+      background:#f8fafc;
+    }
+    .btn.primary{
+      border-color: rgba(11,95,255,.25);
+      background: rgba(11,95,255,.06);
+      color:#0b3ea6;
+    }
+    .btn svg{ width:14px;height:14px }
+
+    .empty{
+      padding:14px 12px;
+      color:var(--sub);
+      font-size:13px;
+      border:1px dashed var(--border);
+      border-radius:var(--radius2);
+      background: #fff;
+      margin:10px 0;
+    }
+
+    /* Footer */
+    footer{
+      max-width:var(--max);
+      margin:22px auto 26px;
+      padding:0 20px;
+      color:var(--sub);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      font-size:12px;
+    }
+    .footer-icons{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .iconlink{
+      width:34px;height:34px;border-radius:10px;
+      border:1px solid var(--border);
+      background:#fff;
+      display:grid;place-items:center;
+      color:#1b2a43;
+    }
+    .iconlink:hover{
+      background:#f8fafc;
+    }
+    .iconlink svg{ width:18px;height:18px }
+  </style>
 </head>
+
 <body>
-  <header class="topbar">
-    <div class="brand">
-      <div class="logo">AGI&amp;M</div>
-      <div class="title">
-        <div class="h1">Downloads</div>
-        <div class="sub">Official public documents and assets</div>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">AG</div>
+        <div>
+          <h1>AGI&amp;M ASSETS INC.</h1>
+          <p>Official public documents and resources</p>
+        </div>
       </div>
+
+      <div class="search">
+        <input id="q" type="search" placeholder="Search files..." autocomplete="off" />
+      </div>
+    </header>
+
+    <div class="status" id="status">
+      <div class="left">
+        <span class="dot" id="statusDot"></span>
+        <span id="statusText">Initializing…</span>
+      </div>
+      <div class="right" id="statusRight"></div>
     </div>
-    <div class="right">
-      <input id="search" class="search" placeholder="Search files..." />
+
+    <div class="grid">
+      <section class="section">
+        <div class="section-head">
+          <div class="section-title">
+            <h2>Product Specifications</h2>
+          </div>
+          <span class="pill" id="countSpecs">0</span>
+        </div>
+        <div class="section-body" id="specs"></div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div class="section-title">
+            <h2>Standard Contracts</h2>
+          </div>
+          <span class="pill" id="countContracts">0</span>
+        </div>
+        <div class="section-body" id="contracts"></div>
+      </section>
     </div>
-  </header>
 
-  <main class="wrap">
-    <section class="card" id="statusCard">
-      <div class="cardTitle">Status</div>
-      <div class="muted" id="status">Loading file list...</div>
+    <section class="section" style="margin-top:16px;">
+      <div class="section-head">
+        <div class="section-title">
+          <h2>Other Attachments</h2>
+        </div>
+        <span class="pill" id="countOther">0</span>
+      </div>
+      <div class="section-body" id="other"></div>
     </section>
+  </div>
 
-    <section class="card" id="downloadsCard">
-      <div class="cardTitle">Downloads</div>
-      <div class="muted">Quick links (auto generated)</div>
-      <div id="downloads" class="downloads"></div>
-    </section>
-
-    <section class="grid">
-      <section class="card">
-        <div class="cardTitle">Product Specs</div>
-        <div id="cat_specs" class="list"></div>
-      </section>
-
-      <section class="card">
-        <div class="cardTitle">Standard Contracts</div>
-        <div id="cat_contracts" class="list"></div>
-      </section>
-
-      <section class="card">
-        <div class="cardTitle">Certifications</div>
-        <div id="cat_certs" class="list"></div>
-      </section>
-
-      <section class="card">
-        <div class="cardTitle">Product Images</div>
-        <div id="cat_images" class="list"></div>
-      </section>
-
-      <section class="card">
-        <div class="cardTitle">Other Files</div>
-        <div id="cat_other" class="list"></div>
-      </section>
-    </section>
-  </main>
-
-  <footer class="footer">
+  <footer>
     <div>© <span id="year"></span> AGI&amp;M ASSETS INC. All rights reserved.</div>
-    <div class="footerLinks">
-      <a href="https://agim.ca" target="_blank" rel="noreferrer">agim.ca</a>
-      <span class="dot">•</span>
-      <a href="https://github.com/enxpower" target="_blank" rel="noreferrer">GitHub</a>
-      <span class="dot">•</span>
-      <a href="https://www.linkedin.com/in/gongtiejing" target="_blank" rel="noreferrer">LinkedIn</a>
+    <div class="footer-icons">
+      <a class="iconlink" id="githubLink" href="#" target="_blank" rel="noopener" aria-label="GitHub">
+        <!-- GitHub -->
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 .5C5.73.5.75 5.6.75 12c0 5.1 3.17 9.43 7.57 10.95.55.1.75-.24.75-.53v-1.9c-3.08.68-3.73-1.51-3.73-1.51-.5-1.32-1.23-1.67-1.23-1.67-1.01-.71.08-.7.08-.7 1.12.08 1.71 1.18 1.71 1.18 1 .1.76 2.12 2.92 1.5.1-.74.39-1.25.71-1.54-2.46-.29-5.05-1.26-5.05-5.6 0-1.24.43-2.25 1.14-3.05-.11-.29-.5-1.46.11-3.04 0 0 .93-.3 3.05 1.16a10.3 10.3 0 0 1 2.78-.39c.94 0 1.89.13 2.78.39 2.12-1.46 3.05-1.16 3.05-1.16.61 1.58.22 2.75.11 3.04.71.8 1.14 1.81 1.14 3.05 0 4.35-2.6 5.31-5.08 5.59.4.35.76 1.05.76 2.12v3.14c0 .29.2.64.76.53A11.6 11.6 0 0 0 23.25 12C23.25 5.6 18.27.5 12 .5z"/>
+        </svg>
+      </a>
+
+      <a class="iconlink" id="linkedinLink" href="#" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <!-- LinkedIn -->
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.44-2.13 2.94v5.67H9.37V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.35-1.85 3.58 0 4.24 2.36 4.24 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46C23.2 24 24 23.23 24 22.28V1.72C24 .77 23.2 0 22.23 0z"/>
+        </svg>
+      </a>
     </div>
   </footer>
 
-  <script src="./app.js"></script>
+  <script>
+    // =========================
+    // CONFIG — update these
+    // =========================
+    const CONFIG = {
+      API_KEY: "PASTE_YOUR_GOOGLE_API_KEY_HERE",
+      FOLDER_ID: "1ZqY1PNVU5rvZ64-BJQygvWPks9SmOr3F",
+      GITHUB_URL: "https://github.com/enxpower",
+      LINKEDIN_URL: "https://www.linkedin.com/in/gongtiejing/"
+    };
+
+    // ====== IMPORTANT SECURITY NOTE ======
+    // If your API key is currently blocked by referrer, you MUST add allowed referrers:
+    //   https://docs.agim.ca/*
+    //   https://agim.ca/*
+    //   https://www.agim.ca/*
+    // And rotate the key if you accidentally pasted it publicly anywhere.
+    // =====================================
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+    document.getElementById("githubLink").href = CONFIG.GITHUB_URL;
+    document.getElementById("linkedinLink").href = CONFIG.LINKEDIN_URL;
+
+    const els = {
+      q: document.getElementById("q"),
+      specs: document.getElementById("specs"),
+      contracts: document.getElementById("contracts"),
+      other: document.getElementById("other"),
+      countSpecs: document.getElementById("countSpecs"),
+      countContracts: document.getElementById("countContracts"),
+      countOther: document.getElementById("countOther"),
+      statusDot: document.getElementById("statusDot"),
+      statusText: document.getElementById("statusText"),
+      statusRight: document.getElementById("statusRight")
+    };
+
+    function setStatus(state, text, right="") {
+      els.statusText.textContent = text;
+      els.statusRight.textContent = right;
+      els.statusDot.classList.remove("ok","err");
+      if (state === "ok") els.statusDot.classList.add("ok");
+      if (state === "err") els.statusDot.classList.add("err");
+    }
+
+    function escapeHtml(s){
+      return (s || "").replace(/[&<>"']/g, c => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+      }[c]));
+    }
+
+    function formatSize(bytes){
+      if (!bytes) return "";
+      const n = Number(bytes);
+      if (Number.isNaN(n) || n <= 0) return "";
+      const units = ["B","KB","MB","GB"];
+      let i = 0, v = n;
+      while (v >= 1024 && i < units.length-1) { v /= 1024; i++; }
+      return `${v.toFixed(v>=10||i===0?0:1)} ${units[i]}`;
+    }
+
+    // ---------- Categorization rules ----------
+    // Specs: spec, datasheet, technical
+    // Contracts: contract, agreement, terms, msa, eula
+    function categorize(name){
+      const s = (name || "").toLowerCase();
+
+      const isContract = /(contract|agreement|terms|msa|eula)/.test(s);
+      if (isContract) return "contracts";
+
+      const isSpec = /(spec|datasheet|technical|specification)/.test(s);
+      if (isSpec) return "specs";
+
+      return "other";
+    }
+
+    function fileTypeIcon(mimeType, name){
+      const n = (name||"").toLowerCase();
+      if (mimeType === "application/pdf" || n.endsWith(".pdf")) return "PDF";
+      if (n.endsWith(".png") || n.endsWith(".jpg") || n.endsWith(".jpeg") || n.endsWith(".webp")) return "IMG";
+      if (n.endsWith(".doc") || n.endsWith(".docx")) return "DOC";
+      if (n.endsWith(".xls") || n.endsWith(".xlsx") || n.endsWith(".csv")) return "XLS";
+      if (n.endsWith(".ppt") || n.endsWith(".pptx")) return "PPT";
+      return "FILE";
+    }
+
+    function viewUrl(id){
+      return `https://drive.google.com/file/d/${encodeURIComponent(id)}/view`;
+    }
+    function downloadUrl(id){
+      return `https://drive.google.com/uc?export=download&id=${encodeURIComponent(id)}`;
+    }
+
+    function renderList(container, items, query){
+      container.innerHTML = "";
+
+      const q = (query || "").trim().toLowerCase();
+      const filtered = q
+        ? items.filter(x => (x.name || "").toLowerCase().includes(q))
+        : items.slice();
+
+      if (filtered.length === 0){
+        container.innerHTML = `<div class="empty">No matching files.</div>`;
+        return;
+      }
+
+      for (const f of filtered){
+        const iconText = fileTypeIcon(f.mimeType, f.name);
+        const safeName = escapeHtml(f.name || "Untitled");
+        const size = formatSize(f.size);
+        const modified = f.modifiedTime ? new Date(f.modifiedTime).toISOString().slice(0,10) : "";
+
+        const metaParts = [];
+        if (size) metaParts.push(size);
+        if (modified) metaParts.push(`Updated ${modified}`);
+
+        const meta = metaParts.length ? metaParts.join(" · ") : "";
+
+        const row = document.createElement("div");
+        row.className = "file";
+        row.innerHTML = `
+          <div class="file-left">
+            <div class="icon" aria-hidden="true"><strong>${iconText}</strong></div>
+            <div style="min-width:0">
+              <p class="file-name">${safeName}</p>
+              <p class="file-meta">${escapeHtml(meta)}</p>
+            </div>
+          </div>
+          <div class="file-actions">
+            <a class="btn" href="${viewUrl(f.id)}" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-8a3 3 0 1 0 .001 6.001A3 3 0 0 0 12 9z"/></svg>
+              View
+            </a>
+            <a class="btn primary" href="${downloadUrl(f.id)}">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3a1 1 0 0 1 1 1v9.59l2.3-2.3a1 1 0 1 1 1.4 1.42l-4.01 4a1 1 0 0 1-1.38 0l-4.01-4a1 1 0 1 1 1.4-1.42L11 13.59V4a1 1 0 0 1 1-1zM5 19a1 1 0 0 1 1-1h12a1 1 0 1 1 0 2H6a1 1 0 0 1-1-1z"/></svg>
+              Download
+            </a>
+          </div>
+        `;
+        container.appendChild(row);
+      }
+    }
+
+    async function listFilesInFolder(folderId){
+      // Drive API v3: files.list
+      // We request minimal fields only.
+      // NOTE: This requires the folder to be publicly accessible OR shared appropriately.
+      const fields = "files(id,name,mimeType,size,modifiedTime),nextPageToken";
+      const base = "https://www.googleapis.com/drive/v3/files";
+      const q = encodeURIComponent(`'${folderId}' in parents and trashed=false`);
+      const pageSize = 1000;
+
+      let all = [];
+      let pageToken = "";
+
+      while (true){
+        const url = new URL(base);
+        url.searchParams.set("q", `'${folderId}' in parents and trashed=false`);
+        url.searchParams.set("fields", fields);
+        url.searchParams.set("pageSize", String(pageSize));
+        url.searchParams.set("key", CONFIG.API_KEY);
+        url.searchParams.set("orderBy", "name");
+        if (pageToken) url.searchParams.set("pageToken", pageToken);
+
+        const res = await fetch(url.toString(), { method:"GET" });
+        const data = await res.json();
+
+        if (!res.ok){
+          const msg = (data && data.error && data.error.message) ? data.error.message : `Request failed (${res.status})`;
+          throw new Error(msg);
+        }
+
+        all = all.concat(data.files || []);
+        pageToken = data.nextPageToken || "";
+        if (!pageToken) break;
+      }
+
+      return all;
+    }
+
+    function splitByCategory(files){
+      const out = { specs:[], contracts:[], other:[] };
+      for (const f of files){
+        const c = categorize(f.name || "");
+        out[c].push(f);
+      }
+      return out;
+    }
+
+    function updateCounts(cat){
+      els.countSpecs.textContent = String(cat.specs.length);
+      els.countContracts.textContent = String(cat.contracts.length);
+      els.countOther.textContent = String(cat.other.length);
+    }
+
+    function renderAll(cat, query=""){
+      renderList(els.specs, cat.specs, query);
+      renderList(els.contracts, cat.contracts, query);
+      renderList(els.other, cat.other, query);
+    }
+
+    async function init(){
+      try{
+        if (!CONFIG.API_KEY || CONFIG.API_KEY.includes("PASTE_YOUR_GOOGLE_API_KEY_HERE")){
+          setStatus("err", "API key not set.", "Update CONFIG.API_KEY in index.html");
+          return;
+        }
+
+        setStatus("", "Loading documents…", "");
+        const files = await listFilesInFolder(CONFIG.FOLDER_ID);
+        const cat = splitByCategory(files);
+        updateCounts(cat);
+
+        const total = files.length;
+        setStatus("ok", `Loaded ${total} files.`, "");
+
+        renderAll(cat, "");
+
+        els.q.addEventListener("input", () => {
+          renderAll(cat, els.q.value);
+        });
+
+      }catch(err){
+        const msg = (err && err.message) ? err.message : "Unknown error";
+        setStatus("err", "Failed to load documents.", msg);
+        // Friendly empty states
+        els.specs.innerHTML = `<div class="empty">Unable to load files.</div>`;
+        els.contracts.innerHTML = `<div class="empty">Unable to load files.</div>`;
+        els.other.innerHTML = `<div class="empty">Unable to load files.</div>`;
+      }
+    }
+
+    init();
+  </script>
 </body>
 </html>
