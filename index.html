@@ -3,9 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>AGI&M ASSETS INC. — Official Documents & Resources</title>
-  <meta name="description" content="AGI&M ASSETS INC. — Official public documents and resources." />
+  <title>AGI&amp;M ASSETS INC — Official Documents &amp; Resources</title>
+  <meta name="description" content="AGI&amp;M ASSETS INC — Official public documents and resources." />
   <meta name="robots" content="index,follow" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon" />
 
   <style>
     :root{
@@ -57,23 +61,25 @@
       min-width:260px;
     }
 
-    .logo{
-      width:40px;height:40px;border-radius:10px;
-      background: linear-gradient(135deg, #1b6cff, #00c2ff);
-      box-shadow: 0 8px 20px rgba(11,95,255,.18);
-      display:grid;place-items:center;
-      color:#fff;
-      font-weight:800;
-      letter-spacing:.5px;
-      user-select:none;
+    /* Real Logo */
+    .brand-logo{
+      width:44px;
+      height:44px;
+      border-radius:12px;
+      object-fit:contain;
+      background:#fff;
+      border:1px solid var(--border);
+      box-shadow: 0 6px 18px rgba(11,18,32,.06);
+      padding:6px;
     }
 
     .brand h1{
       margin:0;
       font-size:16px;
-      letter-spacing:.8px;
+      letter-spacing:.10em;
       text-transform:uppercase;
       line-height:1.2;
+      font-weight:800;
     }
     .brand p{
       margin:3px 0 0;
@@ -128,6 +134,10 @@
     .status .right{
       color:var(--sub);
       font-size:12px;
+      max-width: 60%;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
     }
 
     /* Sections */
@@ -141,6 +151,7 @@
       .grid{ grid-template-columns: 1fr; }
       header{ flex-direction:column; align-items:stretch;}
       .search{ justify-content:flex-start; }
+      .status .right{ max-width:100%; white-space:normal; }
     }
 
     .section{
@@ -171,7 +182,9 @@
       border:1px solid rgba(11,95,255,.14);
       padding:4px 10px;
       border-radius:999px;
-      font-weight:600;
+      font-weight:700;
+      min-width: 38px;
+      text-align:center;
     }
     .section-head h2{
       margin:0;
@@ -207,10 +220,13 @@
       display:grid;place-items:center;
       flex:0 0 auto;
       color:#263a57;
+      font-weight:800;
+      font-size:12px;
+      letter-spacing:.02em;
     }
     .file-name{
       font-size:13px;
-      font-weight:650;
+      font-weight:750;
       line-height:1.25;
       margin:0 0 4px;
       overflow:hidden;
@@ -237,16 +253,19 @@
       padding:8px 10px;
       border-radius:10px;
       font-size:12px;
-      font-weight:650;
+      font-weight:750;
       color:#20324d;
       cursor:pointer;
       display:inline-flex;
       align-items:center;
       gap:6px;
       user-select:none;
+      text-decoration:none;
+      white-space:nowrap;
     }
     .btn:hover{
       background:#f8fafc;
+      text-decoration:none;
     }
     .btn.primary{
       border-color: rgba(11,95,255,.25);
@@ -288,9 +307,11 @@
       background:#fff;
       display:grid;place-items:center;
       color:#1b2a43;
+      text-decoration:none;
     }
     .iconlink:hover{
       background:#f8fafc;
+      text-decoration:none;
     }
     .iconlink svg{ width:18px;height:18px }
   </style>
@@ -300,9 +321,9 @@
   <div class="wrap">
     <header>
       <div class="brand">
-        <div class="logo">AG</div>
+        <img class="brand-logo" src="/assets/logo.png" alt="AGI&amp;M Assets Inc Logo" />
         <div>
-          <h1>AGI&amp;M ASSETS INC.</h1>
+          <h1>AGI&amp;M ASSETS INC</h1>
           <p>Official public documents and resources</p>
         </div>
       </div>
@@ -356,14 +377,14 @@
   <footer>
     <div>© <span id="year"></span> AGI&amp;M ASSETS INC. All rights reserved.</div>
     <div class="footer-icons">
-      <a class="iconlink" id="githubLink" href="#" target="_blank" rel="noopener" aria-label="GitHub">
+      <a class="iconlink" id="githubLink" href="https://github.com/enxpower" target="_blank" rel="noopener" aria-label="GitHub">
         <!-- GitHub -->
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M12 .5C5.73.5.75 5.6.75 12c0 5.1 3.17 9.43 7.57 10.95.55.1.75-.24.75-.53v-1.9c-3.08.68-3.73-1.51-3.73-1.51-.5-1.32-1.23-1.67-1.23-1.67-1.01-.71.08-.7.08-.7 1.12.08 1.71 1.18 1.71 1.18 1 .1.76 2.12 2.92 1.5.1-.74.39-1.25.71-1.54-2.46-.29-5.05-1.26-5.05-5.6 0-1.24.43-2.25 1.14-3.05-.11-.29-.5-1.46.11-3.04 0 0 .93-.3 3.05 1.16a10.3 10.3 0 0 1 2.78-.39c.94 0 1.89.13 2.78.39 2.12-1.46 3.05-1.16 3.05-1.16.61 1.58.22 2.75.11 3.04.71.8 1.14 1.81 1.14 3.05 0 4.35-2.6 5.31-5.08 5.59.4.35.76 1.05.76 2.12v3.14c0 .29.2.64.76.53A11.6 11.6 0 0 0 23.25 12C23.25 5.6 18.27.5 12 .5z"/>
         </svg>
       </a>
 
-      <a class="iconlink" id="linkedinLink" href="#" target="_blank" rel="noopener" aria-label="LinkedIn">
+      <a class="iconlink" id="linkedinLink" href="https://linkedin.com/company/agimassets" target="_blank" rel="noopener" aria-label="LinkedIn">
         <!-- LinkedIn -->
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.44-2.13 2.94v5.67H9.37V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.35-1.85 3.58 0 4.24 2.36 4.24 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46C23.2 24 24 23.23 24 22.28V1.72C24 .77 23.2 0 22.23 0z"/>
@@ -383,13 +404,10 @@
       LINKEDIN_URL: "https://linkedin.com/company/agimassets"
     };
 
-    // ====== IMPORTANT SECURITY NOTE ======
-    // If your API key is currently blocked by referrer, you MUST add allowed referrers:
+    // If your API key is blocked by referrer, add allowed referrers in Google Cloud:
     //   https://docs.agim.ca/*
     //   https://agim.ca/*
     //   https://www.agim.ca/*
-    // And rotate the key if you accidentally pasted it publicly anywhere.
-    // =====================================
 
     document.getElementById("year").textContent = new Date().getFullYear();
     document.getElementById("githubLink").href = CONFIG.GITHUB_URL;
@@ -433,7 +451,7 @@
     }
 
     // ---------- Categorization rules ----------
-    // Specs: spec, datasheet, technical
+    // Specs: spec, datasheet, technical, specification
     // Contracts: contract, agreement, terms, msa, eula
     function categorize(name){
       const s = (name || "").toLowerCase();
@@ -493,7 +511,7 @@
         row.className = "file";
         row.innerHTML = `
           <div class="file-left">
-            <div class="icon" aria-hidden="true"><strong>${iconText}</strong></div>
+            <div class="icon" aria-hidden="true">${iconText}</div>
             <div style="min-width:0">
               <p class="file-name">${safeName}</p>
               <p class="file-meta">${escapeHtml(meta)}</p>
@@ -515,12 +533,8 @@
     }
 
     async function listFilesInFolder(folderId){
-      // Drive API v3: files.list
-      // We request minimal fields only.
-      // NOTE: This requires the folder to be publicly accessible OR shared appropriately.
       const fields = "files(id,name,mimeType,size,modifiedTime),nextPageToken";
       const base = "https://www.googleapis.com/drive/v3/files";
-      const q = encodeURIComponent(`'${folderId}' in parents and trashed=false`);
       const pageSize = 1000;
 
       let all = [];
@@ -574,7 +588,7 @@
 
     async function init(){
       try{
-        if (!CONFIG.API_KEY || CONFIG.API_KEY.includes("PASTE_YOUR_GOOGLE_API_KEY_HERE")){
+        if (!CONFIG.API_KEY){
           setStatus("err", "API key not set.", "Update CONFIG.API_KEY in index.html");
           return;
         }
@@ -584,9 +598,7 @@
         const cat = splitByCategory(files);
         updateCounts(cat);
 
-        const total = files.length;
-        setStatus("ok", `Loaded ${total} files.`, "");
-
+        setStatus("ok", `Loaded ${files.length} files.`, "");
         renderAll(cat, "");
 
         els.q.addEventListener("input", () => {
@@ -596,7 +608,6 @@
       }catch(err){
         const msg = (err && err.message) ? err.message : "Unknown error";
         setStatus("err", "Failed to load documents.", msg);
-        // Friendly empty states
         els.specs.innerHTML = `<div class="empty">Unable to load files.</div>`;
         els.contracts.innerHTML = `<div class="empty">Unable to load files.</div>`;
         els.other.innerHTML = `<div class="empty">Unable to load files.</div>`;
