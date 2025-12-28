@@ -18,9 +18,13 @@
       --muted:#f4f6f8;
       --border:#e6e8ec;
       --text:#0b1220;
-      --sub:#516075;
-      --link:#0b5fff;
-      --chip:#eef3ff;
+      --sub:#5b6b82;
+      --sub2:#74859f;
+
+      /* “克制高级”的蓝：不抢眼、不廉价 */
+      --accent:#1b4dff;
+      --accentSoft: rgba(27,77,255,.08);
+
       --shadow: 0 10px 30px rgba(11,18,32,.06);
       --radius:16px;
       --radius2:12px;
@@ -36,13 +40,14 @@
       color:var(--text);
     }
 
-    a{color:var(--link); text-decoration:none}
-    a:hover{text-decoration:underline}
+    /* Links: keep low-key */
+    a{color:inherit; text-decoration:none}
+    a:hover{text-decoration:none}
 
     .wrap{
       max-width:var(--max);
       margin:0 auto;
-      padding:28px 20px 22px;
+      padding:28px 20px 18px;
     }
 
     /* Header */
@@ -51,7 +56,7 @@
       align-items:flex-start;
       justify-content:space-between;
       gap:16px;
-      margin-bottom:18px;
+      margin-bottom:14px;
     }
 
     .brand{
@@ -61,7 +66,6 @@
       min-width:260px;
     }
 
-    /* Real Logo */
     .brand-logo{
       width:44px;
       height:44px;
@@ -71,87 +75,123 @@
       border:1px solid var(--border);
       box-shadow: 0 6px 18px rgba(11,18,32,.06);
       padding:6px;
+      flex:0 0 auto;
     }
 
     .brand h1{
       margin:0;
-      font-size:16px;
+      font-size:14px;
       letter-spacing:.10em;
       text-transform:uppercase;
       line-height:1.2;
-      font-weight:800;
+      font-weight:700; /* 收敛粗暴加粗 */
     }
     .brand p{
-      margin:3px 0 0;
-      font-size:12px;
+      margin:6px 0 0;
+      font-size:13px;
       color:var(--sub);
+      line-height:1.4;
+      font-weight:400;
+    }
+
+    .tools{
+      display:flex;
+      justify-content:flex-end;
+      gap:10px;
+      width: min(560px, 100%);
+      align-items:center;
     }
 
     .search{
-      width: min(520px, 100%);
-      display:flex;
-      justify-content:flex-end;
+      flex:1 1 auto;
+      position:relative;
     }
-
     .search input{
       width:100%;
-      padding:12px 14px;
-      border-radius:12px;
+      padding:12px 14px 12px 40px;
+      border-radius:999px;
       border:1px solid var(--border);
       background:var(--surface);
       outline:none;
       box-shadow: 0 1px 0 rgba(11,18,32,.02);
       font-size:14px;
+      color:var(--text);
     }
     .search input:focus{
-      border-color: rgba(11,95,255,.45);
-      box-shadow: 0 0 0 4px rgba(11,95,255,.10);
+      border-color: rgba(27,77,255,.35);
+      box-shadow: 0 0 0 4px rgba(27,77,255,.10);
+    }
+    .search svg{
+      position:absolute;
+      left:14px;
+      top:50%;
+      transform:translateY(-50%);
+      width:16px;height:16px;
+      color:var(--sub2);
+      pointer-events:none;
     }
 
-    /* Status bar */
+    /* Status bar - more premium, less “dashboard-y” */
     .status{
-      background:var(--muted);
       border:1px solid var(--border);
       border-radius:var(--radius);
       padding:12px 14px;
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:10px;
-      margin:14px 0 18px;
+      gap:12px;
+      margin:12px 0 16px;
+      background:#fff;
+      box-shadow: var(--shadow);
     }
-    .status .left{
-      display:flex; align-items:center; gap:10px;
+
+    .status-left{
+      display:flex;
+      align-items:center;
+      gap:10px;
       color:var(--sub);
       font-size:13px;
+      min-width: 220px;
     }
+
     .dot{
       width:10px;height:10px;border-radius:50%;
       background:#b8c2d3;
     }
     .dot.ok{ background:#1bb55c;}
     .dot.err{ background:#e23d3d;}
-    .status .right{
-      color:var(--sub);
-      font-size:12px;
-      max-width: 60%;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
+
+    .counts{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:flex-end;
     }
 
-    /* Sections */
-    .grid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:16px;
-      align-items:start;
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background: var(--muted);
+      color:var(--sub);
+      font-size:12.5px;
+      white-space:nowrap;
     }
-    @media (max-width: 920px){
-      .grid{ grid-template-columns: 1fr; }
-      header{ flex-direction:column; align-items:stretch;}
-      .search{ justify-content:flex-start; }
-      .status .right{ max-width:100%; white-space:normal; }
+    .chip b{
+      color:var(--text);
+      font-weight:600; /* 克制 */
+    }
+
+    /* Single-column, horizontal feel */
+    .stack{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      margin-top:6px;
     }
 
     .section{
@@ -161,41 +201,39 @@
       box-shadow:var(--shadow);
       overflow:hidden;
     }
+
     .section-head{
       padding:14px 16px;
-      background: linear-gradient(180deg, #ffffff, #fbfcfe);
-      border-bottom:1px solid var(--border);
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:10px;
+      border-bottom:1px solid var(--border);
+      background:#fff;
     }
-    .section-title{
+
+    .section-head h2{
+      margin:0;
+      font-size:13px;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      font-weight:600; /* 不要粗暴加粗 */
+      color:#243247;
+    }
+
+    .section-meta{
+      font-size:12.5px;
+      color:var(--sub);
       display:flex;
       align-items:center;
       gap:10px;
     }
-    .pill{
-      font-size:12px;
-      color:#24406f;
-      background:var(--chip);
-      border:1px solid rgba(11,95,255,.14);
-      padding:4px 10px;
-      border-radius:999px;
-      font-weight:700;
-      min-width: 38px;
-      text-align:center;
-    }
-    .section-head h2{
-      margin:0;
-      font-size:14px;
-      letter-spacing:.2px;
-    }
+
     .section-body{
-      padding:10px;
+      padding:8px 12px 12px;
     }
 
-    /* File cards */
+    /* File rows: more “list” than “cards”, less noisy */
     .file{
       border:1px solid var(--border);
       border-radius:var(--radius2);
@@ -207,38 +245,44 @@
       gap:12px;
       margin:10px 0;
     }
+
     .file-left{
       min-width:0;
       display:flex;
-      gap:10px;
+      gap:12px;
       align-items:flex-start;
     }
+
     .icon{
       width:34px;height:34px;border-radius:10px;
       background:var(--muted);
       border:1px solid var(--border);
       display:grid;place-items:center;
       flex:0 0 auto;
-      color:#263a57;
-      font-weight:800;
+      color:#22324a;
+      font-weight:650; /* 收敛 */
       font-size:12px;
       letter-spacing:.02em;
     }
+
     .file-name{
-      font-size:13px;
-      font-weight:750;
+      font-size:14px;
+      font-weight:600; /* 用 600 够了，不要“黑体大粗” */
       line-height:1.25;
-      margin:0 0 4px;
+      margin:0 0 6px;
       overflow:hidden;
       text-overflow:ellipsis;
       display:-webkit-box;
       -webkit-line-clamp:2;
       -webkit-box-orient:vertical;
+      color:#0b1220;
     }
+
     .file-meta{
-      font-size:12px;
+      font-size:12.5px;
       color:var(--sub);
       margin:0;
+      line-height:1.35;
     }
 
     .file-actions{
@@ -247,31 +291,34 @@
       gap:8px;
       flex:0 0 auto;
     }
+
     .btn{
       border:1px solid var(--border);
       background:#fff;
-      padding:8px 10px;
-      border-radius:10px;
-      font-size:12px;
-      font-weight:750;
-      color:#20324d;
+      padding:9px 12px;
+      border-radius:999px;
+      font-size:12.5px;
+      font-weight:600;
+      color:#1b2a43;
       cursor:pointer;
       display:inline-flex;
       align-items:center;
-      gap:6px;
+      gap:8px;
       user-select:none;
       text-decoration:none;
       white-space:nowrap;
     }
+
     .btn:hover{
       background:#f8fafc;
-      text-decoration:none;
     }
+
     .btn.primary{
-      border-color: rgba(11,95,255,.25);
-      background: rgba(11,95,255,.06);
-      color:#0b3ea6;
+      border-color: rgba(27,77,255,.25);
+      background: var(--accentSoft);
+      color:#1036b8;
     }
+
     .btn svg{ width:14px;height:14px }
 
     .empty{
@@ -284,17 +331,25 @@
       margin:10px 0;
     }
 
-    /* Footer */
+    /* Footer: like agim.ca (slightly different background + spacing) */
     footer{
+      margin-top:18px;
+      background: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+    .footer-inner{
       max-width:var(--max);
-      margin:22px auto 26px;
-      padding:0 20px;
+      margin:0 auto;
+      padding:18px 20px;
       color:var(--sub);
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:10px;
-      font-size:12px;
+      gap:12px;
+      font-size:12.5px;
+    }
+    .footer-left{
+      color: #6b7c94; /* 更柔和 */
     }
     .footer-icons{
       display:flex;
@@ -311,9 +366,17 @@
     }
     .iconlink:hover{
       background:#f8fafc;
-      text-decoration:none;
     }
     .iconlink svg{ width:18px;height:18px }
+
+    @media (max-width: 900px){
+      header{ flex-direction:column; align-items:stretch; }
+      .tools{ width:100%; justify-content:flex-start; }
+      .status{ flex-direction:column; align-items:flex-start; }
+      .counts{ justify-content:flex-start; }
+      .file{ flex-direction:column; align-items:flex-start; }
+      .file-actions{ width:100%; justify-content:flex-start; }
+    }
   </style>
 </head>
 
@@ -321,75 +384,85 @@
   <div class="wrap">
     <header>
       <div class="brand">
-        <img class="brand-logo" src="/assets/logo.png" alt="AGI&amp;M Assets Inc Logo" />
+        <img class="brand-logo" src="/assets/logo.png" alt="AGI&amp;M ASSETS INC Logo" />
         <div>
           <h1>AGI&amp;M ASSETS INC</h1>
           <p>Official public documents and resources</p>
         </div>
       </div>
 
-      <div class="search">
-        <input id="q" type="search" placeholder="Search files..." autocomplete="off" />
+      <div class="tools">
+        <div class="search">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="2"/>
+            <path d="M16.5 16.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <input id="q" type="search" placeholder="Search files..." autocomplete="off" />
+        </div>
       </div>
     </header>
 
     <div class="status" id="status">
-      <div class="left">
+      <div class="status-left">
         <span class="dot" id="statusDot"></span>
         <span id="statusText">Initializing…</span>
+        <span id="statusRight" style="color:var(--sub2)"></span>
       </div>
-      <div class="right" id="statusRight"></div>
+
+      <div class="counts" aria-label="Counts">
+        <span class="chip">Total <b id="countTotal">0</b></span>
+        <span class="chip">Product Specifications <b id="countSpecs">0</b></span>
+        <span class="chip">Standard Contracts <b id="countContracts">0</b></span>
+        <span class="chip">Other Attachments <b id="countOther">0</b></span>
+      </div>
     </div>
 
-    <div class="grid">
+    <div class="stack">
       <section class="section">
         <div class="section-head">
-          <div class="section-title">
-            <h2>Product Specifications</h2>
-          </div>
-          <span class="pill" id="countSpecs">0</span>
+          <h2>Product Specifications</h2>
+          <div class="section-meta"><span id="metaSpecs">0 files</span></div>
         </div>
         <div class="section-body" id="specs"></div>
       </section>
 
       <section class="section">
         <div class="section-head">
-          <div class="section-title">
-            <h2>Standard Contracts</h2>
-          </div>
-          <span class="pill" id="countContracts">0</span>
+          <h2>Standard Contracts</h2>
+          <div class="section-meta"><span id="metaContracts">0 files</span></div>
         </div>
         <div class="section-body" id="contracts"></div>
       </section>
-    </div>
 
-    <section class="section" style="margin-top:16px;">
-      <div class="section-head">
-        <div class="section-title">
+      <section class="section">
+        <div class="section-head">
           <h2>Other Attachments</h2>
+          <div class="section-meta"><span id="metaOther">0 files</span></div>
         </div>
-        <span class="pill" id="countOther">0</span>
-      </div>
-      <div class="section-body" id="other"></div>
-    </section>
+        <div class="section-body" id="other"></div>
+      </section>
+    </div>
   </div>
 
   <footer>
-    <div>© <span id="year"></span> AGI&amp;M ASSETS INC. All rights reserved.</div>
-    <div class="footer-icons">
-      <a class="iconlink" id="githubLink" href="https://github.com/enxpower" target="_blank" rel="noopener" aria-label="GitHub">
-        <!-- GitHub -->
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d="M12 .5C5.73.5.75 5.6.75 12c0 5.1 3.17 9.43 7.57 10.95.55.1.75-.24.75-.53v-1.9c-3.08.68-3.73-1.51-3.73-1.51-.5-1.32-1.23-1.67-1.23-1.67-1.01-.71.08-.7.08-.7 1.12.08 1.71 1.18 1.71 1.18 1 .1.76 2.12 2.92 1.5.1-.74.39-1.25.71-1.54-2.46-.29-5.05-1.26-5.05-5.6 0-1.24.43-2.25 1.14-3.05-.11-.29-.5-1.46.11-3.04 0 0 .93-.3 3.05 1.16a10.3 10.3 0 0 1 2.78-.39c.94 0 1.89.13 2.78.39 2.12-1.46 3.05-1.16 3.05-1.16.61 1.58.22 2.75.11 3.04.71.8 1.14 1.81 1.14 3.05 0 4.35-2.6 5.31-5.08 5.59.4.35.76 1.05.76 2.12v3.14c0 .29.2.64.76.53A11.6 11.6 0 0 0 23.25 12C23.25 5.6 18.27.5 12 .5z"/>
-        </svg>
-      </a>
+    <div class="footer-inner">
+      <div class="footer-left">© <span id="year"></span> AGI&amp;M ASSETS INC. All rights reserved.</div>
 
-      <a class="iconlink" id="linkedinLink" href="https://linkedin.com/company/agimassets" target="_blank" rel="noopener" aria-label="LinkedIn">
-        <!-- LinkedIn -->
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.44-2.13 2.94v5.67H9.37V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.35-1.85 3.58 0 4.24 2.36 4.24 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46C23.2 24 24 23.23 24 22.28V1.72C24 .77 23.2 0 22.23 0z"/>
-        </svg>
-      </a>
+      <div class="footer-icons">
+        <a class="iconlink" id="githubLink" href="https://github.com/enxpower" target="_blank" rel="noopener" aria-label="GitHub">
+          <!-- GitHub -->
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 .5C5.73.5.75 5.6.75 12c0 5.1 3.17 9.43 7.57 10.95.55.1.75-.24.75-.53v-1.9c-3.08.68-3.73-1.51-3.73-1.51-.5-1.32-1.23-1.67-1.23-1.67-1.01-.71.08-.7.08-.7 1.12.08 1.71 1.18 1.71 1.18 1 .1.76 2.12 2.92 1.5.1-.74.39-1.25.71-1.54-2.46-.29-5.05-1.26-5.05-5.6 0-1.24.43-2.25 1.14-3.05-.11-.29-.5-1.46.11-3.04 0 0 .93-.3 3.05 1.16a10.3 10.3 0 0 1 2.78-.39c.94 0 1.89.13 2.78.39 2.12-1.46 3.05-1.16 3.05-1.16.61 1.58.22 2.75.11 3.04.71.8 1.14 1.81 1.14 3.05 0 4.35-2.6 5.31-5.08 5.59.4.35.76 1.05.76 2.12v3.14c0 .29.2.64.76.53A11.6 11.6 0 0 0 23.25 12C23.25 5.6 18.27.5 12 .5z"/>
+          </svg>
+        </a>
+
+        <a class="iconlink" id="linkedinLink" href="https://linkedin.com/company/agimassets" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <!-- LinkedIn -->
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.44-2.13 2.94v5.67H9.37V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.35-1.85 3.58 0 4.24 2.36 4.24 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46C23.2 24 24 23.23 24 22.28V1.72C24 .77 23.2 0 22.23 0z"/>
+          </svg>
+        </a>
+      </div>
     </div>
   </footer>
 
@@ -409,6 +482,7 @@
     //   https://agim.ca/*
     //   https://www.agim.ca/*
 
+    // Auto year
     document.getElementById("year").textContent = new Date().getFullYear();
     document.getElementById("githubLink").href = CONFIG.GITHUB_URL;
     document.getElementById("linkedinLink").href = CONFIG.LINKEDIN_URL;
@@ -418,9 +492,13 @@
       specs: document.getElementById("specs"),
       contracts: document.getElementById("contracts"),
       other: document.getElementById("other"),
+      countTotal: document.getElementById("countTotal"),
       countSpecs: document.getElementById("countSpecs"),
       countContracts: document.getElementById("countContracts"),
       countOther: document.getElementById("countOther"),
+      metaSpecs: document.getElementById("metaSpecs"),
+      metaContracts: document.getElementById("metaContracts"),
+      metaOther: document.getElementById("metaOther"),
       statusDot: document.getElementById("statusDot"),
       statusText: document.getElementById("statusText"),
       statusRight: document.getElementById("statusRight")
@@ -444,24 +522,17 @@
       if (!bytes) return "";
       const n = Number(bytes);
       if (Number.isNaN(n) || n <= 0) return "";
-      const units = ["B","KB","MB","GB"];
+      const units = ["B","KB","MB","GB","TB"];
       let i = 0, v = n;
       while (v >= 1024 && i < units.length-1) { v /= 1024; i++; }
       return `${v.toFixed(v>=10||i===0?0:1)} ${units[i]}`;
     }
 
-    // ---------- Categorization rules ----------
-    // Specs: spec, datasheet, technical, specification
-    // Contracts: contract, agreement, terms, msa, eula
     function categorize(name){
       const s = (name || "").toLowerCase();
-
-      const isContract = /(contract|agreement|terms|msa|eula)/.test(s);
-      if (isContract) return "contracts";
-
-      const isSpec = /(spec|datasheet|technical|specification)/.test(s);
-      if (isSpec) return "specs";
-
+      // Contracts first (higher priority)
+      if (/(contract|agreement|terms|msa|eula)/.test(s)) return "contracts";
+      if (/(spec|datasheet|technical|specification)/.test(s)) return "specs";
       return "other";
     }
 
@@ -472,12 +543,11 @@
       if (n.endsWith(".doc") || n.endsWith(".docx")) return "DOC";
       if (n.endsWith(".xls") || n.endsWith(".xlsx") || n.endsWith(".csv")) return "XLS";
       if (n.endsWith(".ppt") || n.endsWith(".pptx")) return "PPT";
+      if (n.endsWith(".zip") || n.endsWith(".rar") || n.endsWith(".7z")) return "ZIP";
       return "FILE";
     }
 
-    function viewUrl(id){
-      return `https://drive.google.com/file/d/${encodeURIComponent(id)}/view`;
-    }
+    // IMPORTANT: No View/Preview links. Only direct download.
     function downloadUrl(id){
       return `https://drive.google.com/uc?export=download&id=${encodeURIComponent(id)}`;
     }
@@ -504,8 +574,7 @@
         const metaParts = [];
         if (size) metaParts.push(size);
         if (modified) metaParts.push(`Updated ${modified}`);
-
-        const meta = metaParts.length ? metaParts.join(" · ") : "";
+        const meta = metaParts.length ? metaParts.join(" · ") : "—";
 
         const row = document.createElement("div");
         row.className = "file";
@@ -518,12 +587,10 @@
             </div>
           </div>
           <div class="file-actions">
-            <a class="btn" href="${viewUrl(f.id)}" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-8a3 3 0 1 0 .001 6.001A3 3 0 0 0 12 9z"/></svg>
-              View
-            </a>
-            <a class="btn primary" href="${downloadUrl(f.id)}">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3a1 1 0 0 1 1 1v9.59l2.3-2.3a1 1 0 1 1 1.4 1.42l-4.01 4a1 1 0 0 1-1.38 0l-4.01-4a1 1 0 1 1 1.4-1.42L11 13.59V4a1 1 0 0 1 1-1zM5 19a1 1 0 0 1 1-1h12a1 1 0 1 1 0 2H6a1 1 0 0 1-1-1z"/></svg>
+            <a class="btn primary" href="${downloadUrl(f.id)}" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 3a1 1 0 0 1 1 1v9.59l2.3-2.3a1 1 0 1 1 1.4 1.42l-4.01 4a1 1 0 0 1-1.38 0l-4.01-4a1 1 0 1 1 1.4-1.42L11 13.59V4a1 1 0 0 1 1-1zM5 19a1 1 0 0 1 1-1h12a1 1 0 1 1 0 2H6a1 1 0 0 1-1-1z"/>
+              </svg>
               Download
             </a>
           </div>
@@ -574,10 +641,15 @@
       return out;
     }
 
-    function updateCounts(cat){
+    function updateCounts(cat, total){
+      els.countTotal.textContent = String(total);
       els.countSpecs.textContent = String(cat.specs.length);
       els.countContracts.textContent = String(cat.contracts.length);
       els.countOther.textContent = String(cat.other.length);
+
+      els.metaSpecs.textContent = `${cat.specs.length} file${cat.specs.length===1?"":"s"}`;
+      els.metaContracts.textContent = `${cat.contracts.length} file${cat.contracts.length===1?"":"s"}`;
+      els.metaOther.textContent = `${cat.other.length} file${cat.other.length===1?"":"s"}`;
     }
 
     function renderAll(cat, query=""){
@@ -595,8 +667,9 @@
 
         setStatus("", "Loading documents…", "");
         const files = await listFilesInFolder(CONFIG.FOLDER_ID);
+
         const cat = splitByCategory(files);
-        updateCounts(cat);
+        updateCounts(cat, files.length);
 
         setStatus("ok", `Loaded ${files.length} files.`, "");
         renderAll(cat, "");
@@ -611,6 +684,13 @@
         els.specs.innerHTML = `<div class="empty">Unable to load files.</div>`;
         els.contracts.innerHTML = `<div class="empty">Unable to load files.</div>`;
         els.other.innerHTML = `<div class="empty">Unable to load files.</div>`;
+        els.countTotal.textContent = "0";
+        els.countSpecs.textContent = "0";
+        els.countContracts.textContent = "0";
+        els.countOther.textContent = "0";
+        els.metaSpecs.textContent = "0 files";
+        els.metaContracts.textContent = "0 files";
+        els.metaOther.textContent = "0 files";
       }
     }
 
